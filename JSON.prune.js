@@ -87,7 +87,7 @@
 			if (options.replacer) {
 				replacer = options.replacer;
 			}
-			if(options.hideSeen){
+			if(typeof options.hideSeen === 'boolean'){
                 hideSeen = options.hideSeen;
             }
 		} else {
