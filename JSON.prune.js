@@ -19,6 +19,7 @@
 	var DEFAULT_ARRAY_MAX_LENGTH = 50;
 	var DEFAULT_PRUNED_VALUE = '"-pruned-"';
 	var seen; // Same variable used for all stringifications
+    var hideSeen = true;
 	var iterator; // either forEachEnumerableOwnProperty, forEachEnumerableProperty or forEachProperty
 	
 	// iterates on enumerable own properties (default behavior)
@@ -86,6 +87,9 @@
 			if (options.replacer) {
 				replacer = options.replacer;
 			}
+			if(options.hideSeen){
+                hideSeen = options.hideSeen;
+            }
 		} else {
 			iterator = forEachEnumerableOwnProperty;
 		}
@@ -121,7 +125,9 @@
 					}
 					return prunedString;
 				}
-				seen.push(value);
+				if(hideSeen){
+                    seen.push(value);
+                }
 				partial = [];
 				if (Object.prototype.toString.apply(value) === '[object Array]') {
 					length = Math.min(value.length, arrayMaxLength);
